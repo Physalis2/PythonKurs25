@@ -4,9 +4,12 @@ from machine import Pin, I2C
 
 bus = I2C(1, scl=Pin(15), sda=Pin(14))
 hts = HS3003(bus)
+count = -1
+print ("Nr. rH in %  Temp in °C")
 
-while True:
+while count < 900:
     rH   = hts.humidity()
     temp = hts.temperature()
-    print ("rH: %.2f%% T: %.2fC" %(rH, temp))
-    time.sleep_ms(100)
+    count += 1
+    print ("%3d %5.2f %5.2f" %(count, rH, temp))
+    time.sleep_ms(200)
